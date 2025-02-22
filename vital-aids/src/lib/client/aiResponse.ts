@@ -33,6 +33,23 @@ export async function AiChatResponse(
     return text;
 }
 
+export async function AiUssdResponse(
+    history: Message[],
+    prompt: string,
+    systemPrompt:string
+){
+    const model = genAI.getGenerativeModel({
+        model: GEMINI_MODEL,
+        systemInstruction: systemPrompt,
+        generationConfig,
+    });
+    const chatSession = model.startChat({ history: history });
+    const result = await chatSession.sendMessage(prompt);
+    const text = result.response.text();
+    // console.log(text);
+    return text;
+}
+
 export async function AiAidResponse(prompt:string, systemPrompt:string){
     const model = genAI.getGenerativeModel({
         model: GEMINI_MODEL,

@@ -28,6 +28,7 @@ export default function SidePanel({}: Props) {
 const nav_buttons = [
   { title: "First Aid", value: "first-aid" },
   { title: "Hospital", value: "hospital" },
+  { title: "Generate Police Report", value: "police-report" },
   { title: "Register", value: "register" },
 ];
 
@@ -44,6 +45,7 @@ function NavigationButtons() {
           <div>
             {value === "first-aid" && <BriefcaseMedical className="h-5 w-5" />}
             {value === "hospital" && <HospitalIcon className="h-5 w-5" />}
+            {value === "police" && <SquarePen className="h-4s w-4" />}
             {value === "register" && <SquarePen className="h-5 w-5" />}
           </div>
           <p className="text-[1.1rem] font-medium">{title}</p>

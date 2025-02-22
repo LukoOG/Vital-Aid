@@ -1,8 +1,8 @@
-import Chat from "@/components/Chat";
+import Chat from "@/components/chat/Chat";
 
 export default function Home() {
   return (
-    <div className="f-full">
+    <div className="h-full">
       <Chat />
     </div>
   );

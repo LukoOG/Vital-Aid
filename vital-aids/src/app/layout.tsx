@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import SidePanel from "@/components/global/SidePanel";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,9 +26,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} max-h-screen flex h-screen antialiased`}
       >
-        {children}
+        <SidePanel />
+        <div className="overflow-auto scrollbar-thin md:flex-[0.75] lg:flex-[0.85] flex-1">
+          {children}
+        </div>
       </body>
     </html>
   );

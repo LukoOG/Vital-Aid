@@ -1,18 +1,18 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const app = express();
-const port = 3000;
+import { NextApiRequest, NextApiResponse } from "next";
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-app.post("/ussd", (req, res) => {
+export default async function handler(
+    req: NextApiRequest,
+    res: NextApiResponse,
+) {
+    if(req.method == "POST"){
+    console.log('received')
     let sessionId = req.body.sessionId;
     let serviceCode = req.body.serviceCode;
     let phoneNumber = req.body.phoneNumber;
     let text = req.body.text;
 
     let response = "";
+    console.log(res)
 
     if (text === "") {
         response = "CON What do you want to check?\n";
@@ -32,11 +32,8 @@ app.post("/ussd", (req, res) => {
     } else if (text === "1*3") {
         response = "END Please visit the nearest hospital";
     }
-    
-    res.set("Content-Type", "text/plain");
-    res.send(response);
-});
 
-app.listen(port, () => {
-    console.log(`USSD app listening on port ${port}`);
-});
+    return res.status(200).json({"response":response})   
+    
+    }
+}

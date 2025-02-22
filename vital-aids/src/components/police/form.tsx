@@ -1,14 +1,25 @@
 "use client";
 
+import { getAiBodyText } from "@/lib/context/getAiBodyText";
 import { useState } from "react";
+import TextareaAutosize from "react-textarea-autosize";
 
 export default function DocumentForm() {
+  // const handleKeyDown = (e: any) => {
+  //   if (e.key === "Enter" && !e.shiftKey) {
+  //     e.preventDefault();
+  //     e.target.form.requestSubmit();
+  //   }
+  // };
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     address: "",
     phone: "",
+    situation: "",
   });
+  const [textInput, setTextInput] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -17,12 +28,7 @@ export default function DocumentForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const response = await fetch("/api/generate-document", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
-
+    const response = await getAiBodyText(formData);
     if (response.ok) {
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
@@ -71,6 +77,13 @@ export default function DocumentForm() {
         placeholder="Phone"
         onChange={handleChange}
         className="p-2 border rounded"
+      />
+      <TextareaAutosize
+        className="w-full resize-none text-base outline-none md:bg-transparent"
+        placeholder="Enter your situation"
+        autoFocus={true}
+        value={textInput}
+        onChange={(e) => setTextInput(e.target.value)}
       />
       <button type="submit" className="bg-blue-500 text-white py-2 rounded">
         Generate Document

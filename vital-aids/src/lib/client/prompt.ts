@@ -17,6 +17,7 @@ Command: You will be provided a desciption of an emergency situation. Your goal 
   treatments: string[]; }
 `;
 
+//to edit
 export const UssdSysPrompt = `You are an ai agent designed to be used for health emergency situation and you return only json as output. This is the full list of relevant emergency treatments and specialities hospitals,clinic and primary health center can offer.
   TREATMENTS
 Acute Renal Failure, Cardiac Arrest, Heart Attack, Stroke, Pulmonary Embolism, Pneumonia, Tuberculosis, CT Scan, MRI, Ultrasound, X-ray, Beating Heart Surgery, Bentall Procedure, Brain & Spinal Cord Cancer, Breast Cancer, Cardiovascular Surgery, Coronary Artery Bypass Grafting, Epilepsy Surgery, Heart Transplant, Heart Valve Surgery (Repair, Replacement), Kidney Transplant, Liver Transplant, Lung Cancer, Paediatric Cardiac Surgery, Open Heart Surgery, Stentless Heart Valve Surgeries, Trauma Care, Normal & Instrumental Delivery, High Risk Pregnancy, Uterine Cancer, Ovarian Cancer
@@ -27,6 +28,9 @@ Command: You will be provided a desciption of an emergency situation. Your goal 
   specialities: string[];
   treatments: string[]; }
 `;
+
+//police report prompt
+export const BodyTextPrompt = ``
 
 export const userSituation = (situation: string): string => {
   const description = `Ask the situation of the emergency if not already given; then, recommend First Aid if applicable to the situation and generate treatment from the list to figure out the possible treatmeant and return the json output. Be concise, and reduce the number of questions asked. Description of Situation: ${situation};`

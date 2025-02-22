@@ -1,5 +1,7 @@
 import { Message } from "../types";
 
+
+
 export async function getFirstAid(messages: Message[], prompt:string){
     try{
         const result = await fetch("/api/ai/chat",{

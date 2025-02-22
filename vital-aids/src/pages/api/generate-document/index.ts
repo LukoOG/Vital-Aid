@@ -1,4 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { AiBodyResponse } from "@/lib/client/aiResponse";
+import { BodyTextPrompt } from "@/lib/client/prompt";
 import fs from "fs";
 import path from "path";
 import PizZip from "pizzip";
@@ -11,7 +13,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
     try {
         // Get user data from the request
-        const { name, phone, date, body_text } = req.body;
+        const { name, email, phone, date, situation } = req.body;
 
         // Load the .docx template file
         const templatePath = path.join(process.cwd(), "public", "template.docx");
@@ -24,9 +26,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         // Replace placeholders with actual user data
         doc.setData({
             name: name || "John Doe",
-            phone: phone || "john.doe@example.com",
+            email: email || "John.doe@example.com",
+            phone: phone || "+555-555-555",
             date: date || new Date().toLocaleDateString(),
-            body_text: body_text || "This is the body of the letter.",
+            body_text:  AiBodyResponse(BodyTextPrompt, situation)|| "This is the body of the letter.",
         });
 
         // Render the document with the data

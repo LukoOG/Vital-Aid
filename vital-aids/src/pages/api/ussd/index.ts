@@ -5,14 +5,13 @@ export default async function handler(
     res: NextApiResponse,
 ) {
     if(req.method == "POST"){
-    console.log('received')
     let sessionId = req.body.sessionId;
     let serviceCode = req.body.serviceCode;
     let phoneNumber = req.body.phoneNumber;
     let text = req.body.text;
 
     let response = "";
-    console.log(res)
+    // console.log(res)
 
     if (text === "") {
         response = "CON What do you want to check?\n";
@@ -32,8 +31,11 @@ export default async function handler(
     } else if (text === "1*3") {
         response = "END Please visit the nearest hospital";
     }
-
-    return res.status(200).json({"response":response})   
+      // Set content type and send response
+      res.setHeader("Content-Type", "text/plain");
+      res.status(200).send(response);
+      return;
     
     }
+    res.status(405).send("Method Not Allowed");
 }

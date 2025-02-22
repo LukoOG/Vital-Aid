@@ -1,6 +1,7 @@
 "use client";
-// import { getAIFirstAid } from "@/lib/client/getFirstAid";
+
 import { Mic, SendHorizonal, X } from "lucide-react";
+import { getFirstAid } from "@/lib/context/getFirstAid";
 import React, { useState } from "react";
 import { useToast } from "../ui/use-toast";
 import { Message } from "@/lib/types";
@@ -53,7 +54,10 @@ export default function ChatInput({
     ]);
 
     // call ai and get response
-    const result = "stuff"; //await getAIFirstAid(messages, textInput);
+    console.log(textInput);
+    const result = await getFirstAid(messages, currentText);
+    console.log("ere");
+    console.log(result);
 
     if (!result) {
       setMessages(oldMessages);

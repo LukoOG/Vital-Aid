@@ -30,7 +30,7 @@ Command: You will be provided a desciption of an emergency situation. Your goal 
 `;
 
 //police report prompt
-export const BodyTextPrompt = ``
+export const BodyTextPrompt = `You are an ai agent designed for health emergency situations and you return a body of context in the format of a police report describing the emergency situation based on the situation described by the user`
 
 export const userSituation = (situation: string): string => {
   const description = `Ask the situation of the emergency if not already given; then, recommend First Aid if applicable to the situation and generate treatment from the list to figure out the possible treatmeant and return the json output. Be concise, and reduce the number of questions asked. Description of Situation: ${situation};`

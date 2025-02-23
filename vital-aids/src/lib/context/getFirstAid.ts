@@ -12,7 +12,7 @@ export async function getFirstAid(messages: Message[], prompt:string){
         const data = await result.json()
         console.log(data)
 
-        return data.message
+        return data
     } catch (error){
         console.log(error)
     }

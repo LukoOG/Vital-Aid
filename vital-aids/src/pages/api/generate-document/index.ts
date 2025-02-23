@@ -6,7 +6,7 @@ import path from "path";
 import PizZip from "pizzip";
 import Docxtemplater from "docxtemplater";
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== "POST") {
         return res.status(405).json({ error: "Method Not Allowed" });
     }
@@ -29,7 +29,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
             email: email || "John.doe@example.com",
             phone: phone || "+555-555-555",
             date: date || new Date().toLocaleDateString(),
-            body_text:  AiBodyResponse(BodyTextPrompt, situation)|| "This is the body of the letter.",
+            body_text:  await AiBodyResponse(BodyTextPrompt, situation)  || "This is the body of the letter.",
         });
 
         // Render the document with the data

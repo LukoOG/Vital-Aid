@@ -5,13 +5,6 @@ import { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 
 export default function DocumentForm() {
-  // const handleKeyDown = (e: any) => {
-  //   if (e.key === "Enter" && !e.shiftKey) {
-  //     e.preventDefault();
-  //     e.target.form.requestSubmit();
-  //   }
-  // };
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,15 +12,18 @@ export default function DocumentForm() {
     phone: "",
     situation: "",
   });
-  const [textInput, setTextInput] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    console.log(formData);
     const response = await getAiBodyText(formData);
     if (response.ok) {
       const blob = await response.blob();
@@ -81,9 +77,10 @@ export default function DocumentForm() {
       <TextareaAutosize
         className="w-full resize-none text-base outline-none md:bg-transparent"
         placeholder="Enter your situation"
+        name="situation"
         autoFocus={true}
-        value={textInput}
-        onChange={(e) => setTextInput(e.target.value)}
+        value={formData.situation}
+        onChange={handleChange}
       />
       <button type="submit" className="bg-blue-500 text-white py-2 rounded">
         Generate Document

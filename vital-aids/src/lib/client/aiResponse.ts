@@ -74,6 +74,6 @@ export async function AiBodyResponse(prompt:string, sysprompt:string){
 const result = await model.generateContent(prompt);
 const text = result.response.text();
 
-console.log(text);
+// console.log(text);
 return text;
 }

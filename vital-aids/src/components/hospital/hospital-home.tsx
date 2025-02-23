@@ -51,6 +51,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { hospitalCard } from "./hospital-card";
 
 interface Hospital {
   id: number;
@@ -145,12 +146,7 @@ const HospitalHome = () => {
             </div>
           ) : (
             <ul className="divide-y divide-gray-900 pt-4">
-              {hospitals.map((hospital) => (
-                <div key={hospital.id}>
-                  <li>{hospital.name}</li>
-                  <img src={hospital.cover_image} alt={hospital.name} />
-                </div>
-              ))}
+              <p>loading hospitals</p>
             </ul>
           )}
         </div>

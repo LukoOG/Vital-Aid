@@ -1,12 +1,11 @@
 "use client";
 
-import { Mic, SendHorizonal, X } from "lucide-react";
+import { SendHorizonal } from "lucide-react";
 import { getFirstAid } from "@/lib/context/getFirstAid";
 import React, { useState } from "react";
 import { useToast } from "../ui/use-toast";
 import { Message } from "@/lib/types";
 import TextareaAutosize from "react-textarea-autosize";
-// import Image from "next/image";
 
 type Props = {
   setMessages: any;
@@ -22,7 +21,6 @@ export default function ChatInput({
   setLoadingAI,
 }: Props) {
   const [textInput, setTextInput] = useState("");
-  const [imageInput, setImageInput] = useState<any>();
   const { toast } = useToast();
 
   const handleKeyDown = (e: any) => {
@@ -43,7 +41,7 @@ export default function ChatInput({
       });
 
     setLoadingAI(true);
-    let currentText = textInput;
+    const currentText = textInput;
     setTextInput("");
 
     const oldMessages = messages;
@@ -53,59 +51,59 @@ export default function ChatInput({
       { role: "user", parts: [{ text: textInput }] },
     ]);
 
-    // call ai and get response
-    console.log(textInput);
-    const result = await getFirstAid(messages, currentText);
-    console.log("ere");
-    console.log(result);
+    try {
+      const result = await getFirstAid(messages, currentText);
+      
+      if (!result) {
+        setMessages(oldMessages);
+        setTextInput(currentText);
+        return toast({
+          description: "Sorry we could not get response. Try again",
+          duration: 1000,
+        });
+      }
 
-    if (!result) {
-      setMessages(oldMessages);
-      setTextInput(currentText);
-      setLoadingAI(false);
-      return toast({
-        description: "Sorry we could not get response. Try again",
+      setMessages((prevMessages: any) => [
+        ...prevMessages,
+        { role: "model", parts: [{ text: result }] },
+      ]);
+    } catch (error) {
+      toast({
+        description: "An error occurred. Please try again",
+        variant: "destructive",
         duration: 1000,
       });
+    } finally {
+      setLoadingAI(false);
     }
-
-    setMessages((prevMessages: any) => [
-      ...prevMessages,
-      { role: "model", parts: [{ text: result }] },
-    ]);
-    setTextInput("");
-    setLoadingAI(false);
   }
 
   return (
-    <form
-      className="z-10 flex w-full flex-col items-start gap-3 rounded-md border-2 bg-white p-3"
-      onSubmit={handleSubmit}
-    >
-      <TextareaAutosize
-        className="w-full resize-none text-base outline-none md:bg-transparent"
-        placeholder="Enter a prompt here"
-        autoFocus={true}
-        value={textInput}
-        onChange={(e) => setTextInput(e.target.value)}
-        onKeyDown={handleKeyDown}
-      />
+    // Wrapper div to center the form horizontally
+    <div className="flex justify-center w-full">
+      <form
+        className="z-10 flex w-[720px] h-[45px] px-[22px] py-[7px] justify-between items-center rounded-[20px] border border-[#002177] bg-[#D9D9D9]"
+        onSubmit={handleSubmit}
+      >
+        <TextareaAutosize
+          className="w-full resize-none outline-none bg-transparent placeholder:text-[#002177] text-[#002177] text-sm"
+          placeholder="Make a request"
+          autoFocus
+          value={textInput}
+          onChange={(e) => setTextInput(e.target.value)}
+          onKeyDown={handleKeyDown}
+          maxRows={1}
+          minRows={1}
+        />
 
-      <button className="hidden" type="submit"></button>
-
-      <div className="flex w-full justify-between">
-        <p></p>
-
-        <div className="flex items-center gap-2 text-cyan-800">
-          <button
-            disabled={loadingAI}
-            type="submit"
-            className="rounded-full bg-black p-2 text-white"
-          >
-            <SendHorizonal className="h-4 w-4 cursor-pointer" />
-          </button>
-        </div>
-      </div>
-    </form>
+        <button
+          disabled={loadingAI}
+          type="submit"
+          className="rounded-full bg-[#002177] p-2 text-white hover:bg-[#002177]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <SendHorizonal className="h-4 w-4" />
+        </button>
+      </form>
+    </div>
   );
 }

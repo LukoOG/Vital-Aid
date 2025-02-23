@@ -1,25 +1,26 @@
+ 
+
 "use client";
 import Link from "next/link";
 import React, { useState } from "react";
-import { BriefcaseMedical, HospitalIcon, SquarePen } from "lucide-react";
+import { FileText, BriefcaseMedical, HospitalIcon, SquarePen, Wallet, Ambulance } from "lucide-react";
+import Image from "next/image";
 
 type Props = {};
 
 export default function SidePanel({}: Props) {
   return (
-    <div className="hidden flex-col bg-stone-100 p-5 shadow-md md:flex md:flex-[0.25] lg:flex-[0.15]">
+    <div className="hidden flex-col bg-stone-100 p-16 shadow-md md:flex md:flex-[0.25] lg:flex-[0.15]">
       <Link
         href="/"
-        className="mt-1 flex items-center gap-2 font-mono text-2xl font-semibold text-blue-900"
+        className="mt-1 flex items-center gap-2"
       >
-        Vital Aid
+       <Image src="logo.svg" width={100} height={100} alt="logo Vital Aid"/>
       </Link>
-
-      {/* navigations */}
 
       <div className="flex flex-1 flex-col justify-between">
         <NavigationButtons />
-        {/* <NavigationLinks /> */}
+        <BottomLinks />
       </div>
     </div>
   );
@@ -27,26 +28,47 @@ export default function SidePanel({}: Props) {
 
 const nav_buttons = [
   { title: "First Aid", value: "first-aid" },
-  { title: "Hospital", value: "hospital" },
-  { title: "Register", value: "register" },
+  { title: "Police Report", value: "police-report" },
+  { title: "Suitable Hospital", value: "hospital" },
+  { title: "Emergency Driver", value: "emergency-driver" },
+  { title: "Emergency Savings", value: "emergency-savings" }, // Fixed extra space
+ 
 ];
 
 function NavigationButtons() {
   return (
-    <div className="mt-[5vh] flex w-full flex-col items-center justify-center gap-5">
+    <div className="mt-[5vh] flex w-full flex-col items-start gap-5">
       {nav_buttons.map(({ value, title }) => (
-        // buttons
         <Link
           href={`/${value}`}
           key={value}
-          className="flex cursor-pointer items-center justify-start gap-2 text-indigo-800"
+          className="flex w-full cursor-pointer items-center justify-start gap-2 text-indigo-800"
         >
           <div>
             {value === "first-aid" && <BriefcaseMedical className="h-5 w-5" />}
+            {value === "police-report" && <FileText className="h-5 w-5" />}
             {value === "hospital" && <HospitalIcon className="h-5 w-5" />}
-            {value === "register" && <SquarePen className="h-5 w-5" />}
+            {value === "emergency-driver" && <Ambulance className="h-5 w-5" />}
+            {value === "emergency-savings" && <Wallet className="h-5 w-5" />}
+            
           </div>
-          <p className="text-[1.1rem] font-medium">{title}</p>
+          <p className="text-[0.9rem] font-medium">{title}</p>
+        </Link>
+      ))}
+    </div>
+  );
+}
+
+function BottomLinks() {
+  return (
+    <div className="flex flex-col items-start gap-2 border-t pt-5">
+      {["Sign Up", "About Us", "Contact Us"].map((text) => (
+        <Link
+          href="#"
+          key={text}
+          className="text-[0.9rem] font-medium text-indigo-800 transition-colors hover:text-indigo-600"
+        >
+          {text}
         </Link>
       ))}
     </div>

@@ -1,5 +1,9 @@
-function Hospital() {
-  return <p>Stuff</p>;
-}
+import HospitalHome from "@/components/hospital/hospital-home";
 
-export default Hospital;
+export default function Hospital() {
+  return (
+    <div>
+      <HospitalHome />
+    </div>
+  );
+}

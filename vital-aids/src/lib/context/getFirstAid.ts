@@ -1,7 +1,5 @@
 import { Message } from "../types";
 
-
-
 export async function getFirstAid(messages: Message[], prompt:string){
     try{
         const result = await fetch("/api/ai/chat",{
@@ -12,7 +10,7 @@ export async function getFirstAid(messages: Message[], prompt:string){
         const data = await result.json()
         console.log(data)
 
-        return data
+        return data.message
     } catch (error){
         console.log(error)
     }

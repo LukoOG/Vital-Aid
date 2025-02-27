@@ -17,7 +17,9 @@ interface Hospital {
 }
 
 export default function HospitalLocationPage() {
-  const { location } = useParams();
+  // const { location } = useParams();
+  const params = useParams();
+  const location = typeof params?.location === "string" ? params.location : "";
   const [hospitals, setHospitals] = useState<Hospital[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 

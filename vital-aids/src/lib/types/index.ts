@@ -25,7 +25,6 @@ export type Message = {
     treatments: string[];
     specialities: string[];
     score: number;
-    // undetermined
     distance: number;
     open: boolean;
   };

@@ -1,6 +1,24 @@
 import Link from "next/link";
 
-export default function HospitalCard({ hospital }) {
+interface Hospital {
+  id: number;
+  address: string;
+  contact: string;
+  cover_image: string;
+  description: string;
+  google_maps_url: string;
+  name: string;
+  specialities: string[];
+  treatments: string[];
+  created_at: string;
+}
+
+interface HospitalCardProps {
+  hospital: Hospital; // Using the Hospital interface directly
+}
+
+export default function HospitalCard({ hospital }: HospitalCardProps) {
+  // console.log(hospital);
   return (
     <div
       key={hospital.id}

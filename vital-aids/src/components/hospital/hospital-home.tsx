@@ -51,7 +51,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { hospitalCard } from "./hospital-card";
 
 interface Hospital {
   id: number;

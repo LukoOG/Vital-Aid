@@ -5,9 +5,7 @@ import ChatHistory from "./chat-history";
 
 import { useState } from "react";
 
-type Props = {};
-
-export default function Chat({}: Props) {
+export default function Chat() {
   const [messages, setMessages] = useState([]);
   const [loadingAI, setLoadingAI] = useState(false);
   const chatContainerRef = useAutoScroll(messages);

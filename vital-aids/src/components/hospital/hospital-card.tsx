@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 interface Hospital {
   id: number;
@@ -24,10 +25,17 @@ export default function HospitalCard({ hospital }: HospitalCardProps) {
       key={hospital.id}
       className="bg-white rounded-2xl shadow-lg p-4 w-full max-w-md"
     >
-      <img
+      {/* <img
         src={hospital.cover_image}
         alt={hospital.name}
         className="w-full h-48 object-cover rounded-lg"
+      /> */}
+      <Image
+        src={hospital.cover_image}
+        width={100}
+        height={100}
+        className="w-full h-48 object-cover rounded-lg"
+        alt={hospital.name}
       />
       <h2 className="text-xl font-semibold mt-3">{hospital.name}</h2>
       <p className="text-gray-600 text-sm mt-1">{hospital.address}</p>

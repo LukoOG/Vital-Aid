@@ -1,19 +1,16 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 import {
   FileText,
   BriefcaseMedical,
   HospitalIcon,
-  SquarePen,
   Wallet,
   Ambulance,
 } from "lucide-react";
 import Image from "next/image";
 
-type Props = {};
-
-export default function SidePanel({}: Props) {
+export default function SidePanel() {
   return (
     <div className="hidden flex-col bg-stone-100 p-16 shadow-md md:flex md:flex-[0.25] lg:flex-[0.15]">
       <Link href="/" className="mt-1 flex items-center gap-2">

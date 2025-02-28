@@ -53,7 +53,7 @@ export default function ChatInput({
 
     try {
       const result = await getFirstAid(messages, currentText);
-      
+
       if (!result) {
         setMessages(oldMessages);
         setTextInput(currentText);
@@ -69,7 +69,7 @@ export default function ChatInput({
       ]);
     } catch (error) {
       toast({
-        description: "An error occurred. Please try again",
+        description: error + "An error occurred. Please try again",
         variant: "destructive",
         duration: 1000,
       });

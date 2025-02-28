@@ -5,10 +5,10 @@ export default async function handler(
     res: NextApiResponse,
 ) {
     if(req.method == "POST"){
-    let sessionId = req.body.sessionId;
-    let serviceCode = req.body.serviceCode;
-    let phoneNumber = req.body.phoneNumber;
-    let text = req.body.text;
+    // const sessionId = req.body.sessionId;
+    // const serviceCode = req.body.serviceCode;
+    // const phoneNumber = req.body.phoneNumber;
+    const text = req.body.text;
 
     let response = "";
     // console.log(res)

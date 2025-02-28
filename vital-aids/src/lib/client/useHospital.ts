@@ -15,6 +15,9 @@ const useHospitalStore = create(
     situationText: "",
     // [long,lat]
     mapLocation: [],
+    getSituation: ()=>{
+      return get().situationText; 
+    },
     updateSituation: (value: string) => {
       set({
         situationText: value,
@@ -39,7 +42,7 @@ export type HospitalListType = {
   selectHospital: (hospital: HospitalType) => void;
 };
 
-export const useHospitalList = create<HospitalListType>((set, get) => ({
+export const useHospitalList = create<HospitalListType>((set) => ({
   locatedHospitals: null,
   selectedHospital: null,
   updateHospitalsList: (hospitals) => {

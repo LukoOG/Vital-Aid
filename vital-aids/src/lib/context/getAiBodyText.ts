@@ -1,5 +1,3 @@
-import { Message } from "../types";
-
 type formProps = {
     name: string,
     email: string,

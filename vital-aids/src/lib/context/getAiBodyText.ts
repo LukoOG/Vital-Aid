@@ -22,5 +22,6 @@ export async function getAiBodyText(formdata: formProps){
 
     } catch (error){
         console.log(error)
+        return undefined
     }
 }

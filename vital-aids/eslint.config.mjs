@@ -21,7 +21,7 @@ const eslintConfig = [
       parser: tsParser,
     },
     plugins: {
-      "@typescript-eslint": tseslint,
+      // "@typescript-eslint": tseslint,
     },
     rules: {
       "@typescript-eslint/no-explicit-any": "off",

@@ -1,16 +1,6 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "vital-aids/package.json",
-        "use": "@vercel/next"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "vital-aids/$1"
-      }
-    ]
-  }
-  
+  "version": 2,
+  "routes": [
+    { "src": "/(.*)", "dest": "/" }
+  ]
+}

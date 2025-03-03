@@ -7,6 +7,7 @@
     "@google/generative-ai": "^0.22.0",
     "@radix-ui/react-toast": "^1.2.6",
     "@supabase/supabase-js": "^2.49.1",
+    "@tailwindcss/postcss": "^4.0.9",
     "bail": "^2.0.2",
     "browserslist": "^4.24.4",
     "busboy": "^1.6.0",
@@ -89,6 +90,7 @@
     "parse-entities": "^4.0.2",
     "picocolors": "^1.1.1",
     "pizzip": "^3.1.8",
+    "postcss": "^8.5.3",
     "postcss-value-parser": "^4.2.0",
     "property-information": "^7.0.0",
     "react": "^19.0.0",
@@ -109,6 +111,7 @@
     "style-to-object": "^1.0.8",
     "styled-jsx": "^5.1.6",
     "tailwind-merge": "^3.0.2",
+    "tailwindcss": "^4.0.9",
     "tapable": "^2.2.1",
     "tr46": "^0.0.3",
     "trim-lines": "^3.0.1",
@@ -146,9 +149,6 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "autoprefixer": "^10.4.20",
-    "lightningcss": "^1.29.1",
-    "postcss": "^8.5.3",
-    "tailwindcss": "^4.0.9"
+    "lightningcss": "^1.29.1"
   }
 }

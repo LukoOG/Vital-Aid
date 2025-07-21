@@ -4,7 +4,7 @@ import { Message } from "../types";
 
 dotenv.config()
 
-const api_key: string = process.env.API_KEY || "AIzaSyCD2xv_p09djCQcTXa1RFH_GvvEKqleQms"
+const api_key= "AIzaSyCD2xv_p09djCQcTXa1RFH_GvvEKqleQms"
 const genAI = new GoogleGenerativeAI(api_key)
 const GEMINI_MODEL = "gemini-1.5-flash";
 

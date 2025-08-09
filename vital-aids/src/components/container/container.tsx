@@ -16,7 +16,7 @@ const Container = () => {
         {[
           { text: "Police Report", value: "police-report", bg: "#FFF" },
           { text: "First Aid", value: "first-aid", bg: "#FFF" },
-          { text: "Suitable Hospital", value: "hospital", bg: "#FFF" },
+          { text: "Suitable Hospitalss", value: "hospital", bg: "#FFF" },
           { text: "Emergency Driver", value: "emergency-driver", bg: "#FFF" },
         ].map((service, index) => (
           <Link

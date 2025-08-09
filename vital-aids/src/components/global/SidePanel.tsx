@@ -1,73 +1,99 @@
-"use client";
-import Link from "next/link";
-import React from "react";
+'use client';
+
+import React from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import {
+  Plus,
   FileText,
-  BriefcaseMedical,
-  HospitalIcon,
-  Wallet,
-  Ambulance,
-} from "lucide-react";
-import Image from "next/image";
+  Heart,
+  Building2,
+  Car,
+  PiggyBank,
+  LogIn,
+  User,
+  Phone,
+} from 'lucide-react';
 
-export default function SidePanel() {
+const sidebarItems = [
+  { id: '', icon: Plus, label: 'Home' },
+  { id: 'police-report', icon: FileText, label: 'Police Report' },
+  { id: 'first-aid', icon: Heart, label: 'First Aid' },
+  { id: 'suitable-hospital', icon: Building2, label: 'Suitable Hospital' },
+  { id: 'emergency-driver', icon: Car, label: 'Emergency Driver' },
+  { id: 'emergency-savings', icon: PiggyBank, label: 'Emergency Savings' },
+];
+
+const Sidebar: React.FC = () => {
+  const router = useRouter();
+  const pathname = usePathname() ?? '';
+  const active = pathname.split('/')[1] || ''; // fallback to '' for root
+
+  const handleNavigation = (id: string) => {
+    const path = id === '' ? '/' : `/${id}`;
+    router.push(path);
+  };
+
   return (
-    <div className="hidden flex-col bg-stone-100 p-16 shadow-md md:flex md:flex-[0.25] lg:flex-[0.15]">
-      <Link href="/" className="mt-1 flex items-center gap-2">
-        <Image src="logo.svg" width={100} height={100} alt="logo Vital Aid" />
-      </Link>
+    <div className="w-64 bg-stone-100 border-r border-gray-200 flex flex-col h-screen hidden md:flex">
+      {/* Logo */}
+      <div className="pt-10 px-6 pb-6">
+        <button
+          onClick={() => handleNavigation('')}
+          className="flex items-center space-x-2 focus:outline-none"
+        >
+          <div className="w-7 h-7 bg-indigo-600 rounded flex items-center justify-center">
+            <Plus className="w-4 h-4 text-white" />
+          </div>
+          <h1 className="text-lg font-bold text-gray-800">VitalAid</h1>
+        </button>
+      </div>
 
-      <div className="flex flex-1 flex-col justify-between">
-        <NavigationButtons />
-        <BottomLinks />
+      {/* Nav */}
+      <nav className="flex-1 px-6">
+        <ul className="space-y-1.5">
+          {sidebarItems.map(({ id, icon: Icon, label }) => (
+            <li key={id}>
+              <button
+                onClick={() => handleNavigation(id)}
+                className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-colors duration-200 ${
+                  active === id
+                    ? 'bg-indigo-100 text-indigo-800'
+                    : 'text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                <Icon className="w-4 h-4 text-indigo-600" />
+                <span className="text-xs font-medium">{label}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      {/* Footer */}
+      <div className="p-4 border-t border-gray-200">
+        <ul className="space-y-1">
+          <li>
+            <button className="flex items-center space-x-3 px-3 py-2 text-indigo-800 hover:bg-indigo-50 rounded-lg w-full text-left">
+              <LogIn className="w-3.5 h-3.5" />
+              <span className="text-xs">Sign Up</span>
+            </button>
+          </li>
+          <li>
+            <button className="flex items-center space-x-3 px-3 py-2 text-indigo-800 hover:bg-indigo-50 rounded-lg w-full text-left">
+              <User className="w-3.5 h-3.5" />
+              <span className="text-xs">About Us</span>
+            </button>
+          </li>
+          <li>
+            <button className="flex items-center space-x-3 px-3 py-2 text-indigo-800 hover:bg-indigo-50 rounded-lg w-full text-left">
+              <Phone className="w-3.5 h-3.5" />
+              <span className="text-xs">Contact Us</span>
+            </button>
+          </li>
+        </ul>
       </div>
     </div>
   );
-}
+};
 
-const nav_buttons = [
-  { title: "First Aid", value: "first-aid" },
-  { title: "Police Report", value: "police-report" },
-  { title: "Suitable Hospital", value: "hospital" },
-  { title: "Emergency Driver", value: "emergency-driver" },
-  { title: "Emergency Savings", value: "emergency-savings" }, // Fixed extra space
-];
-
-function NavigationButtons() {
-  return (
-    <div className="mt-[5vh] flex w-full flex-col items-start gap-5">
-      {nav_buttons.map(({ value, title }) => (
-        <Link
-          href={`/${value}`}
-          key={value}
-          className="flex w-full cursor-pointer items-center justify-start gap-2 text-indigo-800"
-        >
-          <div>
-            {value === "first-aid" && <BriefcaseMedical className="h-5 w-5" />}
-            {value === "police-report" && <FileText className="h-5 w-5" />}
-            {value === "hospital" && <HospitalIcon className="h-5 w-5" />}
-            {value === "emergency-driver" && <Ambulance className="h-5 w-5" />}
-            {value === "emergency-savings" && <Wallet className="h-5 w-5" />}
-          </div>
-          <p className="text-[0.9rem] font-medium">{title}</p>
-        </Link>
-      ))}
-    </div>
-  );
-}
-
-function BottomLinks() {
-  return (
-    <div className="flex flex-col items-start gap-2 border-t pt-5">
-      {["Sign Up", "About Us", "Contact Us"].map((text) => (
-        <Link
-          href="#"
-          key={text}
-          className="text-[0.9rem] font-medium text-indigo-800 transition-colors hover:text-indigo-600"
-        >
-          {text}
-        </Link>
-      ))}
-    </div>
-  );
-}
+export default Sidebar;
